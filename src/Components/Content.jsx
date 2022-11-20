@@ -22,9 +22,9 @@ import Data from './Data';
 
 function Content() {
 
-  
-
-    let [allCategories, setAllCategories] = useState([])
+  const [filteredList, setFilteredList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([])
+  let [allCategories, setAllCategories] = useState([])
 
   let categories = () => {
     let list = Data.map((e) => e.category);
@@ -32,8 +32,6 @@ function Content() {
     setAllCategories([...list]);
     console.log(list);
   }
-
-  const [selectedCategory, setSelectedCategory] = useState([])
 
   let searchCategoryItem = (val) => {
     let filteredList = [];
@@ -45,7 +43,6 @@ function Content() {
   }
 
 
-  const [filteredList, setFilteredList] = useState([]);
 
   // function for selected chip
   let selectChip = (val) => {
@@ -76,11 +73,6 @@ function Content() {
     });
     setFilteredList([...arr])
   }
-
- 
-
-
-
   // useeffect Hook
 
   useEffect(() => {
@@ -154,9 +146,9 @@ function Content() {
         </Box>
       </Box>
       {/* Chip Section */}
-      <Box sx={{ border:"1px solid red",display: "flex", justifyContent: "center" }}>
+      <Box sx={{  padding:1, display: "flex", justifyContent: "center" }}>
         {selectedCategory && selectedCategory.length > 0 ? selectedCategory.map((x, i) =>
-          <Chip key={i} variant="outlined" onDelete={() => removeChip(i)} label={x} />
+          <Chip key={i} variant="outlined" color="primary"  onDelete={() => removeChip(i)} label={x} />
         ) : null}
 
 
@@ -168,13 +160,13 @@ function Content() {
 
 
       {/* Selecting Card  */}
-      <Container>
-        <Grid container sx={{ border: "1px solid blue", display: "flex", justifyContent: "space-around" }}>
+      <Container sx={{marginTop:"40px", padding:0}}>
+        <Grid container sx={{ borderBottom: "1px solid grey", display: "flex", justifyContent: "space-around" }}>
           {/* <Container sx={{ border: "1px solid green",display:"flex"}}> */}
           {filteredList.map((e, i) => (
-            <Grid item xl={2} lg={2} md={3} sm={6} xs={12} m={1} key={i}>
+            <Grid item xl={2} lg={2} md={6} sm={6} xs={12} m={1} key={i}>
               <Card
-                sx={{ maxWidth: "350%", border: "1px solid blue" }}
+                sx={{ maxWidth: "350%"}}
               >
                 <Box
                   display={"flex"}
@@ -209,7 +201,7 @@ function Content() {
                   </Typography>
 
                   <Typography sx={{ fontSize: 12 }} color="text.secondary" mt={2}>
-                    {e.category} • {e.sold}
+                    Sold Product - {e.sold}
                   </Typography>
                 </CardContent>
               </Card>
@@ -223,7 +215,7 @@ function Content() {
 
 
       {/* Map All cards  */}
-      <Container>
+      <Container sx={{marginTop:"40px", padding:0}}>
         <Grid container sx={{ justifyContent: "space-around" }}>
 
           {Data.map((e, i) => (
@@ -231,7 +223,7 @@ function Content() {
               key={i}
             >
               <Card
-                sx={{ maxWidth: 290, height: 300, border: "1px solid blue" }}
+                sx={{ maxWidth: 290, height: 300, border: "1px solid #cecece" }}
               >
                 <Box
                   display={"flex"}
@@ -267,7 +259,7 @@ function Content() {
                   </Typography>
 
                   <Typography sx={{ fontSize: 12 }} color="text.secondary" mt={2}>
-                    {e.category} • {e.sold}
+                  Sold Product - {e.sold}
                   </Typography>
                 </CardContent>
               </Card>
